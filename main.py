@@ -1,6 +1,7 @@
 import subprocess
 
 def set_git_alias(alias_name, alias_command):
+    '''This code defines a function to set a global Git alias using the subprocess module.'''
     try:
         git_config_command = f'git config --global alias.{alias_name} "{alias_command}"'
         subprocess.run(git_config_command, shell=True, check=True)
@@ -10,6 +11,7 @@ def set_git_alias(alias_name, alias_command):
         print(e.stderr)
 
 def remove_git_alias(alias_name):
+    '''The code defines a function to remove a global Git alias, using subprocess to run Git commands.'''
     try:
         git_config_command = f'git config --global --unset alias.{alias_name}'
         subprocess.run(git_config_command, shell=True, check=True)
@@ -20,16 +22,15 @@ def remove_git_alias(alias_name):
 
 
 alias_dict = {
-    "a" : r"add -A",
-    "acm" : r"!git add -A && git commit -m",
-    "ll" : r"log --oneline",  
-    "mc" : r"commit -m",
-    "rh" : r"reset --hard",
-    "s" : r"status",
-    "se" : r"log --grep"
+    "a" : r"add -A",                            #adds all the files
+    "acm" : r"!git add -A && git commit -m",    #adds and commit the files with a message
+    "ll" : r"log --oneline",                    #displays concise commit history with abbreviated hashes and commit messages.
+    "mc" : r"commit -m",                        #commit files with a message
+    "rh" : r"reset --hard",                     #discards all changes and resets to the specified commit if not previous commit, removing untracked files.
+    "s" : r"status",                            #shows the current status of the repository.
+    "se" : r"log --grep"                        #shows commit history filtered by a specific search pattern in commit messages.
 }
 
 for key, value in alias_dict.items():
     set_git_alias(key, value)
     #remove_git_alias(key)
-
