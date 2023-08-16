@@ -1,6 +1,6 @@
 import subprocess
 
-def set_git_alias(alias_name, alias_command):
+def set_git_alias(alias_name: str, alias_command: str) -> None:
     '''This code defines a function to set a global Git alias using the subprocess module.'''
     try:
         git_config_command = f'git config --global alias.{alias_name} "{alias_command}"'
@@ -10,16 +10,15 @@ def set_git_alias(alias_name, alias_command):
         print("Error setting Git alias:")
         print(e.stderr)
 
-def remove_git_alias(alias_name):
+def remove_git_alias(alias_name: str) -> None:
     '''The code defines a function to remove a global Git alias, using subprocess to run Git commands.'''
     try:
         git_config_command = f'git config --global --unset alias.{alias_name}'
         subprocess.run(git_config_command, shell=True, check=True)
         print(f"Git alias '{alias_name}' has been removed globally.")
     except subprocess.CalledProcessError as e:
-        print("Error setting Git alias:")
+        print("Error removing Git alias:")
         print(e.stderr)
-
 
 alias_dict = {
     "a" : r"add -A",                            #adds all the files
@@ -31,6 +30,7 @@ alias_dict = {
     "se" : r"log --grep"                        #shows commit history filtered by a specific search pattern in commit messages.
 }
 
-for key, value in alias_dict.items():
-    set_git_alias(key, value)
-    #remove_git_alias(key)
+if __name__ == "__main__":
+    for key, value in alias_dict.items():
+        set_git_alias(key, value)
+        #remove_git_alias(key)
