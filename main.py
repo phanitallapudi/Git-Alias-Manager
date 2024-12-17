@@ -22,7 +22,7 @@ def remove_git_alias(alias_name: str) -> None:
 
 alias_dict = {
     "a" : r"add -A",                            #adds all the files
-    "acm" : r"!git add -A && git commit -S -m",    #adds and commit the files with a message
+    "acm" : r"!git add -A && git commit -m",    #adds and commit the files with a message
     "ll" : r"log --oneline",                    #displays concise commit history with abbreviated hashes and commit messages.
     "mc" : r"commit -m",                        #commit files with a message
     "rh" : r"reset --hard",                     #discards all changes and resets to the specified commit if not previous commit, removing untracked files.
